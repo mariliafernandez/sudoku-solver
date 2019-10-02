@@ -61,8 +61,8 @@ def only_choice(values): # Receives a dictionary
                 if digit in values[box]:
                     hits=hits+1
                     last_box = box
-                if hits == 1:
-                    values[last_box] = digit
+            if hits == 1:
+                values[last_box] = digit
     return values
 
 def display_dictionary(values):
