@@ -41,3 +41,32 @@ def display(grid_values):
             grid_display = grid_display + value + ' '        
         i = i+1
     print(grid_display)
+
+def eliminate(values): # Receives a dictionary 
+    # Iterates over all the puzzle boxes
+    solved_values = [box for box in values.keys() if len(values[box]) == 1]
+    for box in solved_values:
+        # If the box have only one value assigned to it,
+        # it will replace this value from every one of its peers 
+        digit = values[box]
+        for peer in peers[box]:
+            values[peer] = values[peer].replace(digit, '')
+    return values                
+
+def only_choice(values): # Receives a dictionary
+    for unit in unitlist:
+        for digit in '123456789':
+            hits=0
+            for box in unit:
+                if digit in values[box]:
+                    hits=hits+1
+                    last_box = box
+                if hits == 1:
+                    values[last_box] = digit
+    return values
+
+def display_dictionary(values):
+    string_values = ''
+    for box in values.keys():
+        string_values = string_values + values.get(box)
+    display(string_values)
